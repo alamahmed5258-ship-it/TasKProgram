@@ -16,6 +16,8 @@ namespace TaskProgram
                 Console.WriteLine("M - Display mean of the numbers");
                 Console.WriteLine("S - Display the smallest number");
                 Console.WriteLine("L - Display the largest number");
+                Console.WriteLine("E - Count positive, negative and zero values");
+                Console.WriteLine("F - Find a number");
                 Console.WriteLine("Q - Quit");
                 Console.WriteLine("Enter Your Choice:");
                 choise = Console.ReadLine();
@@ -45,8 +47,23 @@ namespace TaskProgram
                         {
                             Console.WriteLine("Enter an integer to add :");
                             int input = Convert.ToInt32(Console.ReadLine());
-                            number.Add(input);
-                            Console.WriteLine(input + " added");
+                            int matches = 0;
+                            for (int i = 0; i < number.Count; i++)
+                            {
+                                if (input == number[i])
+                                {
+                                    matches++;
+                                }
+                            }
+                            if (matches == 0)
+                            {
+                                number.Add(input);
+                                Console.WriteLine(input + " added");
+                            }
+                            else
+                            {
+                                Console.WriteLine(input + " already exists in the list");
+                            }
                             break;
                         }
                     case "M":
@@ -113,6 +130,35 @@ namespace TaskProgram
                                 }
                                 Console.WriteLine("Largest number: " + largest);
                             }
+                            break;
+                        }
+                    case "E":
+                    case "e":
+                        {
+                            int positiveCount = 0;
+                            int negativeCount = 0;
+                            int zeroCount = 0;
+
+                            for (int i = 0; i < number.Count; i++)
+                            {
+                                if (number[i] > 0)
+                                {
+                                    positiveCount++;
+                                }
+                                else if (number[i] < 0)
+                                {
+                                    negativeCount++;
+                                }
+                                else
+                                {
+                                    zeroCount++;
+                                }
+                            }
+
+                            Console.WriteLine("Positive numbers: " + positiveCount);
+                            Console.WriteLine("Negative numbers: " + negativeCount);
+                            Console.WriteLine("Zeros: " + zeroCount);
+
                             break;
                         }
                     case "F":
